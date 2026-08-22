@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#050505" />
+<title>BCN / 026 — Barcelona in Fragments</title>
+<style>
+:root{
+  --black:#050505;--ink:#10100f;--paper:#efe9dd;--paper2:#f7f3ea;
+  --blue:#123f8f;--cobalt:#174aa3;--red:#bc3a22;--orange:#d56d27;
+  --green:#2f6046;--gold:#d7a126;--muted:#aaa398;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--black)}
+body{margin:0;background:var(--black);color:#f6f1e8;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:#f6f1e8;color:#111}
+
+.topbar{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:19px 25px;mix-blend-mode:difference;color:#fff;pointer-events:none}
+.brand,.topmeta{font-size:10px;line-height:1.2;letter-spacing:.18em;text-transform:uppercase}
+.brand{font-weight:700}.topmeta{text-align:right}
+
+.hero{min-height:100svh;position:relative;overflow:hidden;display:grid;place-items:center;padding:90px 28px 48px;background:radial-gradient(circle at 50% 45%,#121212 0,#050505 45%,#020202 100%)}
+.hero-copy{position:relative;z-index:20;width:min(860px,88vw);text-align:center}
+.hero .eyebrow{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#c5beb2;margin-bottom:28px;opacity:0;animation:rise .8s .15s forwards}
+.hero h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(56px,10vw,144px);line-height:.79;letter-spacing:-.065em;margin:0;opacity:0;animation:rise 1s .28s forwards}
+.hero h1 em{font-style:italic;font-weight:400;color:#d6cfc4}
+.hero .dek{max-width:520px;margin:28px auto 0;font-size:11px;line-height:1.65;letter-spacing:.13em;text-transform:uppercase;color:#9e978d;opacity:0;animation:rise .8s .48s forwards}
+.enter{margin-top:38px;display:inline-flex;align-items:center;gap:14px;border:1px solid rgba(255,255,255,.24);padding:14px 18px;background:rgba(255,255,255,.02);color:#fff;cursor:pointer;font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:0;animation:rise .8s .65s forwards;transition:.3s ease}
+.enter:hover{background:#fff;color:#000;border-color:#fff}.enter .dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+
+.hero-frag{position:absolute;z-index:4;width:var(--w);max-width:360px;filter:drop-shadow(0 22px 30px rgba(0,0,0,.48));transform:translate3d(var(--tx,0),var(--ty,0),0) rotate(var(--r));animation:float var(--dur) ease-in-out infinite alternate;will-change:transform}
+.hero-frag img{width:100%;display:block}
+.hf1{--w:min(26vw,330px);left:-4vw;top:11%;--r:-16deg;--dur:5.8s}
+.hf2{--w:min(22vw,280px);right:-2vw;top:8%;--r:13deg;--dur:6.4s}
+.hf3{--w:min(21vw,260px);left:8vw;bottom:1%;--r:8deg;--dur:7.1s}
+.hf4{--w:min(24vw,300px);right:5vw;bottom:-3%;--r:-8deg;--dur:6.8s}
+.hf5{--w:min(12vw,150px);left:23vw;top:18%;--r:17deg;--dur:5.1s;opacity:.8}
+.hf6{--w:min(11vw,135px);right:24vw;top:18%;--r:-18deg;--dur:5.4s;opacity:.82}
+@keyframes float{to{transform:translate3d(var(--tx,0),calc(var(--ty,0) - 16px),0) rotate(calc(var(--r) + 2deg))}}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.scroll-cue{position:absolute;left:50%;bottom:24px;z-index:22;transform:translateX(-50%);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#817b73;display:flex;flex-direction:column;align-items:center;gap:9px}.scroll-cue:after{content:'';width:1px;height:28px;background:#6e6963}
+
+.manifesto{background:var(--paper);color:var(--ink);padding:120px 6vw 100px;position:relative}
+.manifesto-grid{max-width:1280px;margin:auto;display:grid;grid-template-columns:.58fr 1.42fr;gap:8vw;align-items:start}
+.manifesto .small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;line-height:1.6;color:#665f57;padding-top:12px}
+.manifesto h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(46px,6.6vw,94px);line-height:.9;letter-spacing:-.055em;margin:0;max-width:950px}
+.manifesto h2 em{font-style:italic;color:var(--blue)}
+.manifesto-foot{max-width:1280px;margin:70px auto 0;border-top:1px solid #bdb5a8;padding-top:18px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#6d655b}
+
+.fragments{background:#060606;padding:108px 5vw 120px;position:relative;overflow:hidden}
+.section-head{max-width:1280px;margin:0 auto 60px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+.section-head h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(52px,7vw,108px);font-weight:400;letter-spacing:-.06em;line-height:.85;margin:0}
+.section-head p{max-width:340px;color:#8f887e;font-size:11px;line-height:1.6;letter-spacing:.08em;text-transform:uppercase;margin:0}
+.pieces-stage{max-width:1280px;margin:auto;min-height:780px;position:relative;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
+.piece{position:absolute;left:var(--x);top:var(--y);width:var(--w);transform:translate(-50%,-50%) rotate(var(--r));border:0;background:none;padding:0;color:#fff;cursor:pointer;z-index:var(--z);transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .35s ease;filter:drop-shadow(0 22px 22px rgba(0,0,0,.45));text-align:left}
+.piece img{width:100%;display:block;transition:filter .3s ease}
+.piece:hover{transform:translate(-50%,-50%) rotate(0deg) scale(1.075);z-index:30}.piece:hover img{filter:saturate(1.1) brightness(1.04)}
+.piece-label{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:80%;text-align:center;text-shadow:0 2px 12px rgba(0,0,0,.8);font-family:Georgia,'Times New Roman',serif;font-size:clamp(17px,2vw,31px);line-height:.95;pointer-events:none}
+.piece-label b{display:block;font:700 9px/1 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+
+.day{position:relative;overflow:hidden}
+.day-inner{max-width:1280px;margin:auto;padding:120px 5vw;display:grid;grid-template-columns:.72fr 1.28fr;gap:7vw;position:relative;z-index:2}
+.day.light{background:var(--paper2);color:#111}.day.dark{background:#080808;color:#f3eee5}
+.day-num{font-family:Georgia,'Times New Roman',serif;font-size:clamp(110px,16vw,250px);line-height:.72;letter-spacing:-.08em;margin:0;color:transparent;-webkit-text-stroke:1px rgba(18,18,18,.22)}
+.dark .day-num{-webkit-text-stroke-color:rgba(255,255,255,.22)}
+.day-kicker{font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin:20px 0 12px;color:#746d63}.dark .day-kicker{color:#8d867c}
+.day-title{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(44px,6vw,86px);line-height:.9;letter-spacing:-.05em;margin:0 0 26px}
+.day-title em{font-style:italic;color:var(--red)}
+.timeline{border-top:1px solid currentColor}
+.event{display:grid;grid-template-columns:110px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid rgba(0,0,0,.18)}
+.dark .event{border-color:rgba(255,255,255,.15)}
+.event time{font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding-top:2px}.event strong{font-size:11px;letter-spacing:.09em;text-transform:uppercase}.event p{font-size:12px;line-height:1.55;margin:5px 0 0;color:#756e65}.dark .event p{color:#a29a90}
+.day-art{position:absolute;right:-6vw;bottom:-15%;width:min(42vw,620px);opacity:.24;transform:rotate(-10deg);filter:saturate(.8)}
+.day1-art{left:-5vw;right:auto;bottom:-14%;transform:rotate(13deg)}
+.day2-highlight{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.highlight-card{position:relative;min-height:270px;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:#0d0d0d}
+.highlight-card img{position:absolute;width:78%;right:-13%;bottom:-18%;transform:rotate(-9deg);filter:drop-shadow(0 20px 20px #000)}
+.highlight-card:nth-child(2) img{width:82%;right:-20%;bottom:-25%;transform:rotate(7deg)}
+.highlight-card .hc-copy{position:absolute;left:18px;top:18px;z-index:3}.hc-copy b{display:block;font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:#9b948b;margin-bottom:8px}.hc-copy span{font-family:Georgia,'Times New Roman',serif;font-size:28px;line-height:.92}
+
+.essentials{background:#d9a129;color:#10100f;padding:110px 6vw}
+.ess-inner{max-width:1280px;margin:auto;display:grid;grid-template-columns:1.1fr .9fr;gap:7vw;align-items:start}
+.essentials h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(54px,8vw,118px);line-height:.82;letter-spacing:-.06em;font-weight:400;margin:0}
+.essentials h2 em{font-style:italic;color:#f7f0df}.facts{border-top:1px solid rgba(0,0,0,.45)}
+.fact{display:grid;grid-template-columns:130px 1fr;gap:20px;padding:17px 0;border-bottom:1px solid rgba(0,0,0,.25)}
+.fact span{font-size:9px;letter-spacing:.15em;text-transform:uppercase}.fact strong{font-size:12px;font-weight:600}
+
+.finale{min-height:88svh;background:#050505;position:relative;overflow:hidden;display:grid;place-items:center;padding:90px 24px}
+.final-copy{text-align:center;position:relative;z-index:20}.final-copy .small{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#8b847a;margin-bottom:22px}.final-copy h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(56px,9vw,132px);line-height:.8;letter-spacing:-.065em;margin:0}.final-copy h2 em{font-style:italic;color:#d7a126}.final-copy p{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8e877e;margin-top:26px}
+.final-frag{position:absolute;width:var(--w);left:var(--x);top:var(--y);transform:translate(-50%,-50%) rotate(var(--r));filter:drop-shadow(0 16px 24px rgba(0,0,0,.5));animation:orbit var(--dur) ease-in-out infinite alternate}
+.final-frag img{width:100%;display:block}@keyframes orbit{to{transform:translate(-50%,calc(-50% - 13px)) rotate(calc(var(--r) + 2deg))}}
+.footer{background:#050505;border-top:1px solid rgba(255,255,255,.13);padding:22px 25px;display:flex;justify-content:space-between;color:#777067;font-size:9px;letter-spacing:.15em;text-transform:uppercase;gap:20px;flex-wrap:wrap}
+
+.drawer{position:fixed;inset:0;z-index:200;pointer-events:none;background:rgba(0,0,0,0);transition:background .45s ease}.drawer.open{pointer-events:auto;background:rgba(0,0,0,.56)}
+.drawer-panel{position:absolute;right:0;top:0;height:100%;width:min(650px,92vw);background:#f2ede3;color:#111;transform:translateX(102%);transition:transform .6s cubic-bezier(.2,.8,.2,1);padding:26px 28px 42px;overflow:auto}.drawer.open .drawer-panel{transform:none}
+.close{border:1px solid #bbb2a5;background:none;padding:10px 12px;cursor:pointer;font-size:9px;letter-spacing:.14em;text-transform:uppercase}.drawer-top{display:flex;justify-content:space-between;align-items:center}.drawer-art{width:min(320px,72%);display:block;margin:28px auto 14px;filter:drop-shadow(0 20px 20px rgba(0,0,0,.18));transform:rotate(-5deg)}
+.drawer-kicker{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#756e65;margin-top:20px}.drawer h3{font-family:Georgia,'Times New Roman',serif;font-size:clamp(48px,7vw,84px);font-weight:400;line-height:.86;letter-spacing:-.05em;margin:12px 0 18px}.drawer-time{font-size:11px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:14px}.drawer-text{font-size:14px;line-height:1.6;color:#5e584f;max-width:520px}
+.goto{display:inline-flex;margin-top:24px;border-bottom:1px solid #111;padding-bottom:5px;font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+
+@media(max-width:850px){
+ .hero{min-height:840px}.hf1{--w:48vw;left:-17vw;top:13%}.hf2{--w:42vw;right:-15vw;top:13%}.hf3{--w:43vw;left:-8vw;bottom:2%}.hf4{--w:44vw;right:-10vw;bottom:1%}.hf5,.hf6{display:none}
+ .manifesto-grid,.day-inner,.ess-inner{grid-template-columns:1fr}.manifesto{padding-top:90px}.manifesto-grid{gap:40px}
+ .section-head{grid-template-columns:1fr}.pieces-stage{min-height:890px}.piece{width:var(--wm)!important}.piece-label{font-size:18px}
+ .day-inner{padding-top:90px;gap:40px}.day-num{font-size:150px}.day-art{width:70vw;opacity:.12}.day2-highlight{grid-template-columns:1fr}.essentials{padding-top:90px}
+}
+@media(max-width:560px){
+ .topbar{padding:16px}.hero{padding-inline:18px}.hero h1{font-size:64px}.hero .dek{max-width:320px}
+ .fragments{padding-inline:14px}.pieces-stage{min-height:980px}.section-head{margin-bottom:25px}.piece-label{font-size:15px}.piece-label b{font-size:7px}
+ .event{grid-template-columns:82px 1fr;gap:12px}.day-inner{padding-inline:20px}.day-title{font-size:51px}.day-num{font-size:125px}.essentials{padding-inline:20px}.fact{grid-template-columns:95px 1fr}
+ .final-frag{opacity:.62}.final-copy h2{font-size:60px}.drawer-panel{padding-inline:20px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="brand">BCN / 026<br>CEES EDITION</div><div class="topmeta">15—17 SEP 2026<br>BARCELONA</div></div>
+
+<header class="hero" id="top">
+  <div class="hero-frag hf1" data-depth=".35"><img src="frag_flamenco.webp" alt=""></div>
+  <div class="hero-frag hf2" data-depth=".25"><img src="frag_gaudi.webp" alt=""></div>
+  <div class="hero-frag hf3" data-depth=".22"><img src="frag_gothic.webp" alt=""></div>
+  <div class="hero-frag hf4" data-depth=".3"><img src="frag_hotel.webp" alt=""></div>
+  <div class="hero-frag hf5" data-depth=".45"><img src="frag_micro_2.webp" alt=""></div>
+  <div class="hero-frag hf6" data-depth=".4"><img src="frag_micro_4.webp" alt=""></div>
+  <div class="hero-copy">
+    <div class="eyebrow">A Barcelona study in 14 parts</div>
+    <h1>THE CITY<br>COMES IN <em>PIECES</em></h1>
+    <p class="dek">Three days. Fourteen people. One city — explored through work, food, streets, movement and a little flamenco.</p>
+    <a class="enter" href="#fragments"><span class="dot"></span> Enter the journey →</a>
+  </div>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<section class="manifesto">
+ <div class="manifesto-grid"><div class="small">Barcelona / 15—17 September<br>Hotel Porta Fira<br>14 travellers</div><h2>Not a schedule.<br>A collection of <em>moments</em> that only makes sense once every piece is in place.</h2></div>
+ <div class="manifesto-foot"><span>WORK / CITY / FOOD / FLAMENCO</span><span>CEES TEAM BUILDING / 2026</span></div>
+</section>
+
+<section class="fragments" id="fragments">
+ <div class="section-head"><h2>THE JOURNEY<br>IN FRAGMENTS</h2><p>Each piece holds one part of the trip. Tap a fragment to open it.</p></div>
+ <div class="pieces-stage">
+  <button class="piece" data-piece="arrival" style="--x:13%;--y:24%;--w:22%;--wm:45%;--r:-10deg;--z:8"><img src="frag_hotel.webp" alt="Hotel fragment"><span class="piece-label"><b>01 / 15 SEP</b>Arrival</span></button>
+  <button class="piece" data-piece="sessions" style="--x:38%;--y:20%;--w:17%;--wm:39%;--r:7deg;--z:5"><img src="frag_mediterranean.webp" alt="Mosaic fragment"><span class="piece-label"><b>02 / 15 SEP</b>The Team</span></button>
+  <button class="piece" data-piece="citywalk" style="--x:70%;--y:22%;--w:22%;--wm:44%;--r:4deg;--z:7"><img src="frag_gaudi.webp" alt="Gaudi fragment"><span class="piece-label"><b>03 / 15 SEP</b>Barcelona</span></button>
+  <button class="piece" data-piece="treasure" style="--x:27%;--y:50%;--w:21%;--wm:43%;--r:5deg;--z:9"><img src="frag_gothic.webp" alt="Gothic Quarter fragment"><span class="piece-label"><b>04 / 16 SEP</b>Treasure Hunt</span></button>
+  <button class="piece" data-piece="lunch" style="--x:52%;--y:48%;--w:17%;--wm:37%;--r:-7deg;--z:4"><img src="frag_flower.webp" alt="Floral fragment"><span class="piece-label"><b>05 / 16 SEP</b>Lunch</span></button>
+  <button class="piece" data-piece="reset" style="--x:79%;--y:48%;--w:19%;--wm:40%;--r:-9deg;--z:6"><img src="frag_decor.webp" alt="Decorative fragment"><span class="piece-label"><b>06 / 16 SEP</b>Reset</span></button>
+  <button class="piece" data-piece="flamenco" style="--x:16%;--y:78%;--w:24%;--wm:46%;--r:-4deg;--z:10"><img src="frag_flamenco.webp" alt="Flamenco fragment"><span class="piece-label"><b>07 / 16 SEP</b>Flamenco</span></button>
+  <button class="piece" data-piece="dinner" style="--x:49%;--y:76%;--w:20%;--wm:40%;--r:8deg;--z:7"><img src="frag_colorful.webp" alt="Colorful fragment"><span class="piece-label"><b>08 / 16 SEP</b>Dinner</span></button>
+  <button class="piece" data-piece="last" style="--x:78%;--y:77%;--w:19%;--wm:39%;--r:6deg;--z:6"><img src="frag_ornament.webp" alt="Ornamental fragment"><span class="piece-label"><b>09 / 17 SEP</b>Last Piece</span></button>
+ </div>
+</section>
+
+<section class="day light" id="day1">
+ <img class="day-art day1-art" src="frag_hotel.webp" alt="">
+ <div class="day-inner"><div><div class="day-kicker">DAY 01 / TUESDAY</div><div class="day-num">15</div><h2 class="day-title">ARRIVE.<br>SETTLE.<br><em>EXPLORE.</em></h2></div><div class="timeline">
+  <div class="event"><time>Arrival</time><div><strong>Transfers + check-in</strong><p>Everyone arrives, transfers to Hotel Barcelona Porta Fira and gets settled.</p></div></div>
+  <div class="event"><time>14:00–16:00</time><div><strong>Shared sessions + arrival buffer</strong><p>A flexible window for selected work sessions with the people already in the city.</p></div></div>
+  <div class="event"><time>16:00–19:00</time><div><strong>Barcelona walk / sightseeing</strong><p>Optional free-time window for a city walk or sightseeing.</p></div></div>
+  <div class="event"><time>19:00</time><div><strong>Optional dinner at Martínez</strong><p>For whoever is already in Barcelona and still has energy.</p></div></div>
+ </div></div>
+</section>
+
+<section class="day dark" id="day2">
+ <div class="day-inner"><div><div class="day-kicker">DAY 02 / WEDNESDAY</div><div class="day-num">16</div><h2 class="day-title">THE CITY<br>& <em>EXPERIENCES.</em></h2></div><div>
+  <div class="timeline">
+   <div class="event"><time>07:30–09:00</time><div><strong>Breakfast</strong><p>Start slow.</p></div></div>
+   <div class="event"><time>09:00–12:00</time><div><strong>Shared work sessions</strong><p>Focused work block in the conference room.</p></div></div>
+   <div class="event"><time>12:00–15:00</time><div><strong>Treasure Hunt</strong><p>Gothic Quarter → Barceloneta, following a historic route with snacks along the way.</p></div></div>
+   <div class="event"><time>15:00–16:00</time><div><strong>Lunch in the city centre</strong><p>Per-diem lunch window.</p></div></div>
+   <div class="event"><time>16:00–18:00</time><div><strong>Shared work sessions</strong><p>Second focused work block before the evening programme.</p></div></div>
+   <div class="event"><time>18:00–19:00</time><div><strong>Reset & get ready</strong><p>Return to the hotel, disappear for an hour, come back ready.</p></div></div>
+   <div class="event"><time>19:30–22:00</time><div><strong>Flamenco show + dinner</strong><p>Evening experience. Final timing may shift slightly with the show start.</p></div></div>
+  </div>
+  <div class="day2-highlight"><div class="highlight-card"><div class="hc-copy"><b>12:00 / CITY</b><span>Find<br>the way.</span></div><img src="frag_gothic.webp" alt="Gothic Quarter"></div><div class="highlight-card"><div class="hc-copy"><b>19:30 / NIGHT</b><span>Feel<br>the rhythm.</span></div><img src="frag_flamenco.webp" alt="Flamenco"></div></div>
+ </div></div>
+</section>
+
+<section class="day light" id="day3">
+ <img class="day-art" src="frag_ornament.webp" alt="">
+ <div class="day-inner"><div><div class="day-kicker">DAY 03 / THURSDAY</div><div class="day-num">17</div><h2 class="day-title">THE LAST<br><em>PIECE.</em></h2></div><div class="timeline">
+  <div class="event"><time>07:30–09:00</time><div><strong>Breakfast</strong><p>One final breakfast together.</p></div></div>
+  <div class="event"><time>09:00–11:00</time><div><strong>Final shared work sessions</strong><p>Closing work block and final team time.</p></div></div>
+  <div class="event"><time>11:00</time><div><strong>Check-out + return home</strong><p>Departure flow follows individual return journeys.</p></div></div>
+ </div></div>
+</section>
+
+<section class="essentials">
+ <div class="ess-inner"><h2>THE<br><em>ESSENTIALS</em></h2><div class="facts">
+  <div class="fact"><span>Hotel</span><strong>Hotel Barcelona Porta Fira</strong></div>
+  <div class="fact"><span>Main activity</span><strong>Treasure Hunt — Gothic Quarter → Barceloneta</strong></div>
+  <div class="fact"><span>Evening</span><strong>Flamenco show + dinner</strong></div>
+  <div class="fact"><span>Dates</span><strong>15—17 September 2026</strong></div>
+  <div class="fact"><span>Team</span><strong>14 people</strong></div>
+ </div></div>
+</section>
+
+<section class="finale">
+ <div class="final-frag" style="--x:8%;--y:20%;--w:19vw;--r:-12deg;--dur:5.4s"><img src="frag_flamenco.webp" alt=""></div>
+ <div class="final-frag" style="--x:91%;--y:22%;--w:17vw;--r:11deg;--dur:6.2s"><img src="frag_gaudi.webp" alt=""></div>
+ <div class="final-frag" style="--x:12%;--y:82%;--w:17vw;--r:8deg;--dur:6.8s"><img src="frag_gothic.webp" alt=""></div>
+ <div class="final-frag" style="--x:89%;--y:80%;--w:18vw;--r:-9deg;--dur:5.9s"><img src="frag_hotel.webp" alt=""></div>
+ <div class="final-frag" style="--x:26%;--y:14%;--w:8vw;--r:17deg;--dur:5.1s"><img src="frag_micro_1.webp" alt=""></div>
+ <div class="final-frag" style="--x:74%;--y:13%;--w:8vw;--r:-15deg;--dur:5.7s"><img src="frag_micro_3.webp" alt=""></div>
+ <div class="final-copy"><div class="small">THE PICTURE IS COMPLETE</div><h2>14 PEOPLE.<br>14 PIECES.<br><em>ONE BARCELONA.</em></h2><p>See you there.</p></div>
+</section>
+<footer class="footer"><span>BCN / 026</span><span>CEES TEAM BUILDING</span><span>15—17 SEP 2026</span></footer>
+
+<div class="drawer" id="drawer" aria-hidden="true"><div class="drawer-panel"><div class="drawer-top"><div class="brand" style="color:#111">BCN / FRAGMENT</div><button class="close" id="closeDrawer">Close ×</button></div><img id="drawerArt" class="drawer-art" alt=""><div id="drawerKicker" class="drawer-kicker"></div><h3 id="drawerTitle"></h3><div id="drawerTime" class="drawer-time"></div><p id="drawerText" class="drawer-text"></p><a id="drawerLink" class="goto" href="#">See in itinerary →</a></div></div>
+<script>
+(()=>{
+ const data={
+ arrival:{k:'DAY 01 / 15 SEP',t:'ARRIVAL',time:'Arrival windows',text:'Everyone arrives, transfers to Hotel Barcelona Porta Fira and gets settled.',img:'frag_hotel.webp',link:'#day1'},
+ sessions:{k:'DAY 01 / 15 SEP',t:'THE TEAM',time:'14:00–16:00',text:'A flexible window for selected work sessions with the people already in the city.',img:'frag_mediterranean.webp',link:'#day1'},
+ citywalk:{k:'DAY 01 / 15 SEP',t:'BARCELONA',time:'16:00–19:00',text:'Optional free-time window for a city walk or sightseeing before dinner.',img:'frag_gaudi.webp',link:'#day1'},
+ treasure:{k:'DAY 02 / 16 SEP',t:'TREASURE HUNT',time:'12:00–15:00',text:'A route through the Gothic Quarter to Barceloneta, following a historic path with snacks along the way.',img:'frag_gothic.webp',link:'#day2'},
+ lunch:{k:'DAY 02 / 16 SEP',t:'LUNCH',time:'15:00–16:00',text:'Lunch in the city centre — a per-diem window between the Treasure Hunt and the second work block.',img:'frag_flower.webp',link:'#day2'},
+ reset:{k:'DAY 02 / 16 SEP',t:'RESET',time:'18:00–19:00',text:'Return to the hotel, reset and change for the evening programme.',img:'frag_decor.webp',link:'#day2'},
+ flamenco:{k:'DAY 02 / 16 SEP',t:'FLAMENCO',time:'19:30–22:00',text:'Flamenco show and team dinner in a traditional Spanish setting. Final timing remains approximate.',img:'frag_flamenco.webp',link:'#day2'},
+ dinner:{k:'DAY 02 / 16 SEP',t:'DINNER',time:'Evening',text:'Dinner is part of the flamenco evening experience, with the final timing following the show schedule.',img:'frag_colorful.webp',link:'#day2'},
+ last:{k:'DAY 03 / 17 SEP',t:'THE LAST PIECE',time:'09:00–11:00',text:'Final shared work sessions before check-out and the return journey home.',img:'frag_ornament.webp',link:'#day3'}
+ };
+ const drawer=document.getElementById('drawer');
+ const art=document.getElementById('drawerArt'),k=document.getElementById('drawerKicker'),title=document.getElementById('drawerTitle'),time=document.getElementById('drawerTime'),text=document.getElementById('drawerText'),link=document.getElementById('drawerLink');
+ document.querySelectorAll('.piece').forEach(p=>p.addEventListener('click',()=>{const d=data[p.dataset.piece];art.src=d.img;k.textContent=d.k;title.textContent=d.t;time.textContent=d.time;text.textContent=d.text;link.href=d.link;drawer.classList.add('open');drawer.setAttribute('aria-hidden','false')}));
+ function close(){drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true')}
+ document.getElementById('closeDrawer').addEventListener('click',close);drawer.addEventListener('click',e=>{if(e.target===drawer)close()});link.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ if(matchMedia('(pointer:fine)').matches){const hero=document.querySelector('.hero');hero.addEventListener('pointermove',e=>{const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);document.querySelectorAll('.hero-frag[data-depth]').forEach(el=>{const d=+el.dataset.depth;el.style.setProperty('--tx',(x*42*d)+'px');el.style.setProperty('--ty',(y*32*d)+'px')})})}
+})();
+</script>
+</body>
+</html>
